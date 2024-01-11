@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRUD APP</title>
+</head>
+
+<body>
+
+  <h1>Login</h1>
+  <form id="loginForm">
+    <label for="login_id">Username:</label>
+    <input type="text" id="login_id" name="login_id" required><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <button type="button" onclick="authenticateUser()">Login</button>
+  </form>
+
+  <script>
+    function authenticateUser() {
+      const loginId = document.getElementById("login_id").value;
+      const password = document.getElementById("password").value;
+
+      fetch('http://localhost:3000/proxy', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cookie': 'JSESSIONID=7C611C611ED02F5CE7239F0CBB0177D1',
+        },
+        body: JSON.stringify({
+          login_id: loginId,
+          password: password
+        })
+      })
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error('Authentication failed');
+          }
+        })
+        .then(data => {
+          window.location.href = 'customers.html';
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          if (error.message === 'Authentication failed') {
+            alert('Authentication failed. Please check your credentials.');
+          } else {
+            alert('Internal Server Error. Please try again later.');
+          }
+        });
+    }
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADD NEW CUSTOMER</title>
+</head>
+
+<body>
+
+  <h1>ADD NEW CUSTOMER</h1>
+
+  <form id="insertDataForm">
+    <label for="first_name">First Name:</label>
+    <input type="text" id="first_name" name="first_name" required><br>
+
+    <label for="last_name">Last Name:</label>
+    <input type="text" id="last_name" name="last_name" required><br>
+
+    <label for="street">Street:</label>
+    <input type="text" id="street" name="street" required><br>
+
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address" required><br>
+
+    <label for="city">City:</label>
+    <input type="text" id="city" name="city" required><br>
+
+    <label for="state">State:</label>
+    <input type="text" id="state" name="state" required><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br>
+
+    <label for="phone">Phone:</label>
+    <input type="tel" id="phone" name="phone" required><br>
+
+    <button type="button" onclick="submitFormData()">Submit</button>
+  </form>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    function submitFormData() {
+      const firstName = document.getElementById("first_name").value;
+      const lastName = document.getElementById("last_name").value;
+  
+      if (!firstName || !lastName) {
+        alert('First Name and Last Name are mandatory fields.');
+        return;
+      }
+  
+      const formData = {
+        first_name: firstName,
+        last_name: lastName,
+        street: document.getElementById("street").value,
+        address: document.getElementById("address").value,
+        city: document.getElementById("city").value,
+        state: document.getElementById("state").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+      };
+  
+      axios.post('http://localhost:3000/create_data', formData)
+        .then(response => {
+          window.location.href = 'customers.html';
+        })
+        .catch(error => {
+          console.error('Error creating data:', error);
+          alert('Error creating data. Please try again.');
+        });
+    }
+  </script>
+  
+</body>
+
+</html>
