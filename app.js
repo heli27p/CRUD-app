@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/proxy', async (req, res) => {
-  const url = 'https://qa2.sunbasedata.com/sunbase/portal/api/assignment_auth.jsp';
+  const url = 'https://qa.sunbasedata.com/sunbase/portal/api/assignment_auth.jsp';
 
   try {
     const response = await axios.post(url, req.body, {
@@ -32,7 +32,7 @@ app.post('/proxy', async (req, res) => {
 
 app.get('/get_customer_list', async (req, res) => {
   try {
-    const response = await axios.get('https://qa2.sunbasedata.com/sunbase/portal/api/assignment.jsp?cmd=get_customer_list', {
+    const response = await axios.get('https://qa.sunbasedata.com/sunbase/portal/api/assignment.jsp?cmd=get_customer_list', {
       headers: {
         'Authorization': `Bearer ${authToken}`,
         'Cookie': 'JSESSIONID=7C611C611ED02F5CE7239F0CBB0177D1',
@@ -50,7 +50,7 @@ app.post('/delete_customer/:uuid', async (req, res) => {
   const uuid = req.params.uuid;
 
   try {
-    const response = await axios.post(`https://qa2.sunbasedata.com/sunbase/portal/api/assignment.jsp?cmd=delete&uuid=${uuid}`, null, {
+    const response = await axios.post(`https://qa.sunbasedata.com/sunbase/portal/api/assignment.jsp?cmd=delete&uuid=${uuid}`, null, {
       headers: {
         'Authorization': 'Bearer dGVzdEBzdW5iYXNlZGF0YS5jb206VGVzdEAxMjM=',
         'Cookie': 'JSESSIONID=7C611C611ED02F5CE7239F0CBB0177D1',
@@ -66,7 +66,7 @@ app.post('/delete_customer/:uuid', async (req, res) => {
 
 app.post('/create_data', async (req, res) => {
   try {
-    const response = await axios.post('https://qa2.sunbasedata.com/sunbase/portal/api/assignment.jsp?cmd=create', req.body, {
+    const response = await axios.post('https://qa.sunbasedata.com/sunbase/portal/api/assignment.jsp?cmd=create', req.body, {
       headers: {
         'Authorization': `Bearer ${authToken}`,
         'Cookie': 'JSESSIONID=7C611C611ED02F5CE7239F0CBB0177D1; JSESSIONID=7C611C611ED02F5CE7239F0CBB0177D1',
@@ -84,7 +84,7 @@ app.post('/create_data', async (req, res) => {
 app.post('/update_customer/:uuid', async (req, res) => {
   const uuid = req.params.uuid;
 
-  const url = `https://qa2.sunbasedata.com/sunbase/portal/api/assignment.jsp?cmd=update&uuid=${uuid}`;
+  const url = `https://qa.sunbasedata.com/sunbase/portal/api/assignment.jsp?cmd=update&uuid=${uuid}`;
 
   const headers = {
     'Authorization': `Bearer ${authToken}`,
